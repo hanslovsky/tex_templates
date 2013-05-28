@@ -1,2 +1,3 @@
 tex_templates
 =============
+Providing templates for latex for talks, theses, papers...
