@@ -1,0 +1,65 @@
+% use UTF8!
+\usepackage[utf8]{inputenc}
+
+% the language of thesis ; load csquotes for babel
+\usepackage{csquotes}
+\usepackage[english]{babel}
+
+% math and math symbols
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+
+% use si units
+\usepackage{siunitx}
+
+% fonts
+
+% better fond encoding
+\usepackage[T1]{fontenc}
+
+% \includegraphics
+\usepackage{graphicx}
+
+% tables look better
+\usepackage{booktabs}
+
+% tikZ
+\usepackage{tikz}
+
+% Link toc entry to position in text
+\usepackage{hyperref}
+\definecolor{linkcolor}{rgb}{1.0,0.08,0.5}
+\hypersetup{
+    % dftex=true,
+    colorlinks=true,
+    breaklinks=true,
+    linkcolor=linkcolor,
+    menucolor=linkcolor,
+    urlcolor=linkcolor,
+    citecolor=linkcolor
+}
+
+% line numbers
+\usepackage[modulo, switch]{lineno}
+\linenumbers
+
+% clever references
+\usepackage[noabbrev, capitalise]{cleveref}
+
+% fix latex2e bugs
+\usepackage{fixltx2e}
+
+\usepackage{pdfpages}
+
+% References with biber. 
+\usepackage[
+    backend = biber,
+    firstinits = true,
+    % style = phys, % the phys style must be installed separately
+    sortlocale = en_US,
+    natbib = true,
+    doi = false,
+    eprint = false,
+    sorting=none
+]{biblatex}
+
