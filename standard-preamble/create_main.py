@@ -8,7 +8,7 @@ PREAMBLE_FILES = {
 }
 
 def create_default_package_list( directory ):
-    with open( '%s/packages.tex' % directory ) as f:
+    with open( '%s/packages.tex.in' % directory ) as f:
         packages = []
         for line in f.readlines():
             packages.append( line.rstrip('\n') )
