@@ -1,6 +1,43 @@
-% shortcut to create a blank page
-\newcommand{\blankpage}[0]{
-        \newpage
-        \thispagestyle{empty}
-        \mbox{}
+% GMM parameters
+\newcommand{\SIGMAH}[0]{
+{\Sigma }^{(h)}
 }
+
+\newcommand{\MUH}[0]{
+\mathbf{\mu }^{(h)}
+}
+
+% Add a period to the end of an abbreviation unless there's one
+% already, then \xspace.
+% taken from cvpr
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+
+\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
+\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
+\def\cf{\emph{c.f}\onedot} \def\Cf{\emph{C.f}\onedot}
+\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\etal{\emph{et al}\onedot}
+\makeatother
+
+% id
+\DeclareMathOperator{\id}{id}
+
+% true positive, false positive and false negative in math environment + precision, recall,
+% f-measure
+\DeclareMathOperator{\tp}{\#tp}
+\DeclareMathOperator{\fp}{\#fp}
+\DeclareMathOperator{\fn}{\#fn}
+\DeclareMathOperator{\precision}{precision}
+\DeclareMathOperator{\recall}{recall}
+\DeclareMathOperator{\fscore}{F}
+\newcommand{\fmeasure}{
+\fscore_{1}
+}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 
