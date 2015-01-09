@@ -116,7 +116,10 @@ if __name__ == "__main__":
         try:
             os.makedirs( packages_dir )
         except Exception as e:
-            pass
+            if e.exception.errno == os.errno.EEXIST:
+                pass
+            else:
+                raise e
         with open( args.output, 'w' ) as o:
             o.write( document )
         with open( '%s/packages.tex'  % preamble_dir, 'w' ) as p:
