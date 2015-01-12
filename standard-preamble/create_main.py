@@ -47,10 +47,17 @@ def remove_all_occurences( arr, val ):
     for i in indices[::-1]:
         del arr[i]
 
-def copy_by_read_write( source, target ):
-    with open( source, 'r' ) as s:
-        with open( target, 'w' ) as t:
-            t.write( s.read() )
+def copy_by_read_write( source, target, fallback_if_not_found=None ):
+    try:
+        with open( source, 'r' ) as s:
+            content = s.read()
+    except Exception as e:
+        if ( e.errno == 2 and fallback_if_not_found is not None ):
+            content = fallback_if_not_found
+        else:
+            raise e
+    with open( target, 'w' ) as t:
+        t.write( content )
 
 if __name__ == "__main__":
     import argparse
@@ -68,6 +75,7 @@ if __name__ == "__main__":
 
     parser.add_argument( '--include-packages', '-I', default='', type=str, help='Include packages. Use all, if empty string.' )
     parser.add_argument( '--exclude-packages', '-E', default='', type=str, help='Exclude packages. None, if empty string.' )
+    parser.add_argument( '--add-packages', '-A', default='', type=str, help='Add Packages to default packages. None, if empty string' )
 
     args = parser.parse_args()
 
@@ -83,9 +91,11 @@ if __name__ == "__main__":
 
     include = args.include_packages.split(',')
     exclude = args.exclude_packages.split(',')
+    add     = args.add_packages.split(',')
 
     remove_all_occurences( include, '' )
     remove_all_occurences( exclude, '' )
+    remove_all_occurences( add, '' )
 
     files = copy.deepcopy( PREAMBLE_FILES )
     files[ 'docclass' ] = '%s.tex' % docclass
@@ -102,6 +112,9 @@ if __name__ == "__main__":
     template_file = '%s/main.tex.in' % args.input
 
     packages = create_package_include_list( include, exclude, args.input )
+    for a in add:
+        if not a in packages:
+            packages.append( a )
     packages_string = package_list_to_string( packages, args.preamble_dir )
 
     target_root = os.path.dirname(os.path.abspath( args.output ) )
@@ -116,7 +129,7 @@ if __name__ == "__main__":
         try:
             os.makedirs( packages_dir )
         except Exception as e:
-            if e.exception.errno == os.errno.EEXIST:
+            if e.errno == os.errno.EEXIST:
                 pass
             else:
                 raise e
@@ -126,7 +139,9 @@ if __name__ == "__main__":
             p.write( packages_string )
 
         for p in packages:
-            copy_by_read_write( '%s/packages/%s.tex' % ( args.input, p ), '%s/%s.tex' % ( packages_dir, p ) )
+            copy_by_read_write( '%s/packages/%s.tex' % ( args.input, p ),
+                                '%s/%s.tex' % ( packages_dir, p ),
+                                '\\usepackage{%s}' % p )
 
         copy_preamble_files( files, args.input, preamble_dir )
 
