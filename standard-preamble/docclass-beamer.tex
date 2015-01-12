@@ -1,0 +1,26 @@
+\documentclass[pdflatex,compress,svgnames]{beamer}
+% BEAMERTHEME?
+% \usetheme[dark, framenumber, totalframenumber]{UniversiteitAntwerpen}
+\usetheme[orchid]{Singapore}
+\setbeamertemplate{footline}{
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex]{author in head/foot}%
+            \usebeamerfont{author}\hspace{1em}\insertshortauthor
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,right]{title in head/foot}%
+            %\usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+            \usebeamerfont{frame number}\insertframenumber{} / \inserttotalframenumber\hspace*{1em}
+        \end{beamercolorbox}}%
+    \vskip0pt%
+}
+
+%[frame number]
+\setbeamertemplate{navigation symbols}{}
+
+% \AtBeginSection{\frame{\sectionpage}}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 
