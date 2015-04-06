@@ -1,0 +1,11 @@
+\input{%s/%s}%%
+\input{%s/packages}%%
+\input{%s/commands}%%
+%%
+\title{%s}%%
+\author{%s}%%
+\date{%s}%%
+%%
+\begin{document}%%
+%s
+\end{document}%%
