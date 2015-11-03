@@ -62,6 +62,9 @@ def copy_by_read_write( source, target, fallback_if_not_found=None ):
 if __name__ == "__main__":
     import argparse
     import copy
+
+    default_input_path = os.path.dirname( os.path.realpath(__file__) )
+
     parser = argparse.ArgumentParser()
     parser.add_argument( '--docclass', '-c', default='', type=str, help='Define document class of latex document. Empty string uses standard docclass.' )
     
@@ -69,7 +72,7 @@ if __name__ == "__main__":
     parser.add_argument( '--date',   '-d', default='', type=str, help='Date of tex document.' )
     parser.add_argument( '--author', '-a', default='', type=str, help='Author of tex document.' )
 
-    parser.add_argument( '--input',  '-i', default='.', type=str, help='Template file for tex document.' )
+    parser.add_argument( '--input',  '-i', default=default_input_path, type=str, help='Template file for tex document.' )
     parser.add_argument( '--output', '-o', default='main.tex', type=str, help='Target file for tex document.' )
     parser.add_argument( '--preamble-dir', '-p', default='preamble', type=str, help='Directory for storing preamble files, relative to tex master file.' )
 
